@@ -1,15 +1,43 @@
 import React, { useRef } from "react";
 import GoogleMaps from "../../hooks/map_hook.js"
-console.log("GMAPAPAPAPA", GoogleMaps)
 const API_KEY = process.env.REACT_APP_GOOGLE_MAP_KEYS;
 
-
-const initialConfig = {
+let initialConfig = {
   zoom: 10,
-  center:{ lat: 45.421532, lng: -75.697189 }
+  center: null
 }
 
+
+/**
+  Helper Functions
+**/
+const __getCurrentLocation = async() => {
+  const { coords } = await __getCoordinates();
+  return { lat: coords.latitude, lng: coords.longitude }
+}
+
+const __getCoordinates = () => {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+}
+
+let __setConfig = async() => {
+  initialConfig.zoom = 10
+  initialConfig.center = await __getCurrentLocation()
+}
+
+
+/**
+  Map Component function
+**/
 const GMap = () => {
+
+  // Getting the current location -- Not a very wise way
+  // TODO: Use States to get manage current location. Get the Map displayed first, and then
+  // populate the marker with the current location while its done fetching
+  __setConfig();
+
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
       <GoogleMaps initialConfig={ initialConfig }
@@ -22,13 +50,5 @@ const GMap = () => {
     </div>
   )
 }
-
-
-  // const googleMap = useGoogleMap(API_KEY);
-  // const mapContainerRed = useRef(null);
-
-
-
-
 
 export default GMap;

@@ -1,5 +1,5 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-"https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+This project was bootstrapped with [Create React App]
+
 ## Available Scripts
 
 In the project directory, you can run:

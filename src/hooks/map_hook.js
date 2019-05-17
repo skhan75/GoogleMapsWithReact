@@ -3,7 +3,6 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-map
 import ReactDOM from 'react-dom';
 
 function MapContainer({ initialConfig, mapContainerRef }) {
-  console.log("COOORODS", initialConfig)
   return (
     <GoogleMap
       defaultZoom={ initialConfig.zoom }
